@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import ProptimusOmega from './proptimusOmega'
+import ProptimusBeta from './proptimusBeta'
+import ProptimusPrime from './ProptimusPrime'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,24 +14,30 @@ export default class App extends React.Component {
         "Proptimus Beta": "https://library.kissclipart.com/20181004/jbw/kissclipart-alola-exeggutor-height-clipart-optimus-prime-trans-6afe73e9efab0cac.png",
         "Proptimus Omega": "https://cdn.shopify.com/s/files/1/0076/4103/8906/products/Transformers-Movie-Studio-Series-38-Voyager-G1-Optimus-Prime-Semi-truck-Render_1024x1024.png?v=1549582726",
       },
+      activeProp: "",
+      catchPhrase: {
+        "Proptimus Prime": "Here to Help!",
+        "Proptimus Beta": "I'm medium here.",
+        "Proptimus Omega": "Hereish!",
+      }
     }
   }
 
 
   callForBadHelp = (event) => {
-
+    this.setState({ activeProp: "Proptimus Omega"})
   }
 
   callForBetterHelp = (event) => {
-
+    this.setState({ activeProp: "Proptimus Beta"})
   }
 
   gimmeAllYouGot = (event) => {
-
+    this.setState({ activeProp: "Proptimus Prime"})
   }
 
   sendThemHome = (event) => {
-
+    this.setState({ activeProp: ""})
   }
 
   render() {
@@ -36,19 +45,46 @@ export default class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img
-            src={}
+            onClick={this.callForBadHelp}
+            src={this.state.callForHelp}
             className="App-logo"
             alt="logo"
           />
 
-          {this.state && this.state.activeProp === "" /*Which Proptobot should be checked for?*/ &&
+          {this.state && this.state.activeProp === "Proptimus Omega" /*Which Proptobot should be checked for?*/ &&
           <>
             <p className="">Will this do, human?</p>
-            <Proptimus /*Specify your Proptobot here.*/
-              /*You need to pass all of your props to this component here.*/
+            <ProptimusOmega 
+              proptimusPhotos={this.state.proptimusPhotos}
+              catchPhrase={this.state.catchPhrase}
+              callForBetterHelp={this.callForBetterHelp}
             />
           </>
           }
+
+          {this.state && this.state.activeProp === "Proptimus Beta" /*Which Proptobot should be checked for?*/ &&
+            <>
+              <p className="">Will this do, human?</p>
+              <ProptimusBeta
+                proptimusPhotos={this.state.proptimusPhotos}
+                catchPhrase={this.state.catchPhrase}
+                gimmeAllYouGot={this.gimmeAllYouGot}
+              />
+            </>
+          }
+
+          {this.state && this.state.activeProp === "Proptimus Prime" /*Which Proptobot should be checked for?*/ &&
+            <>
+              <p className="">Will this do, human?</p>
+              <ProptimusPrime 
+                proptimusPhotos={this.state.proptimusPhotos}
+                catchPhrase={this.state.catchPhrase}
+                sendThemHome={this.sendThemHome}
+              />
+            </>
+          }
+
+
 
         </header>
       </div>
