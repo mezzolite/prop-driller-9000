@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import ProptimusOmega from './proptimusOmega'
-import ProptimusBeta from './proptimusBeta'
-import ProptimusPrime from './ProptimusPrime'
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -40,6 +39,8 @@ export default class App extends React.Component {
     this.setState({ activeProp: ""})
   }
 
+
+
   render() {
     return (
       <div className="App">
@@ -57,7 +58,8 @@ export default class App extends React.Component {
             <ProptimusOmega 
               proptimusPhotos={this.state.proptimusPhotos}
               catchPhrase={this.state.catchPhrase}
-              callForBetterHelp={this.callForBetterHelp}
+              botAction={this.callForBetterHelp}
+              activeProp={this.state.activeProp}
             />
           </>
           }
@@ -65,10 +67,11 @@ export default class App extends React.Component {
           {this.state && this.state.activeProp === "Proptimus Beta" /*Which Proptobot should be checked for?*/ &&
             <>
               <p className="">Will this do, human?</p>
-              <ProptimusBeta
+              <ProptimusOmega
                 proptimusPhotos={this.state.proptimusPhotos}
                 catchPhrase={this.state.catchPhrase}
-                gimmeAllYouGot={this.gimmeAllYouGot}
+                botAction={this.gimmeAllYouGot}
+                activeProp={this.state.activeProp}
               />
             </>
           }
@@ -76,16 +79,14 @@ export default class App extends React.Component {
           {this.state && this.state.activeProp === "Proptimus Prime" /*Which Proptobot should be checked for?*/ &&
             <>
               <p className="">Will this do, human?</p>
-              <ProptimusPrime 
+              <ProptimusOmega 
                 proptimusPhotos={this.state.proptimusPhotos}
                 catchPhrase={this.state.catchPhrase}
-                sendThemHome={this.sendThemHome}
+                botAction={this.sendThemHome}
+                activeProp={this.state.activeProp}
               />
             </>
           }
-
-
-
         </header>
       </div>
     );
